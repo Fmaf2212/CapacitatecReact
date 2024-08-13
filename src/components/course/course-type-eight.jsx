@@ -107,13 +107,11 @@ const CourseTypeEight = ({ data, classes }) => {
                     <span className="course-level">
                         {data.level}
                     </span>
-
                     <h5 className="title">
                         <Link href={`/course-details/${data.id}`}>
                             {data.title}
                         </Link>
                     </h5>
-
                     <div className="course-rating">
                         <div className="rating">
                             <i className="icon-23"></i>
@@ -126,22 +124,19 @@ const CourseTypeEight = ({ data, classes }) => {
                             ({data.rating})
                         </span>
                     </div>
-
                     <ul className="course-meta">
                         <li>{data.lesson} Lessons</li>
                         <li>{data.duration}</li>
                         <li>{data.level}</li>
                     </ul>
-
                     <div className="course-feature">
                         <h6 className="title">What You’ll Learn?</h6>
                         <ul>
-                            { 
+                            {
                                 data.features.slice(0, 3).map( (feature, featurekey) => <li key={ featurekey }>{ feature }</li> )
                             }
                         </ul>
                     </div>
-
                     <div className="button-group">
                         <a onClick={() => handleAddToCart(data)} style={{ cursor: "pointer" }} className="edu-btn btn-medium">
                             {

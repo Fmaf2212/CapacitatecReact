@@ -88,7 +88,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
           </button> */}
           {/* <span className="course-level">{data.level}</span> */}
           <h6 className="title">
-            <Link href={`/course-details/${data.productId}`}>
+            <Link href={`/course-details-2/${data.productId}`}>
               {data.productName}
             </Link>
           </h6>

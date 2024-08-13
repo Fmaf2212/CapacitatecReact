@@ -63,7 +63,7 @@ const Header = ({ header_style, no_top_bar, disable_full_width, disable_category
                 </div>
 
                 {!disable_category &&
-                  <div className="header-category">
+                  <div className="header-category hidden">
                     <nav className="mainmenu-nav">
                       <ul className="mainmenu">
                         <li className="has-droupdown">
@@ -92,22 +92,38 @@ const Header = ({ header_style, no_top_bar, disable_full_width, disable_category
               </div>
               <div className="header-right">
                 <ul className="header-action">
-                  <li className="search-bar">
+                  {/* <li className="search-bar">
                     <div className="input-group">
                       <input type="text" className="form-control" placeholder="Search" />
                       <button className="search-btn" type="button">
                         <i className="icon-2 font-extrabold"></i>
                       </button>
                     </div>
-                  </li>
-                  <li className="icon search-icon">
+                  </li> */}
+                  {/* <li className="icon search-icon">
                     <a style={{ cursor: 'pointer' }} onClick={() => setIsSearchOpen(true)} className="search-trigger">
                       <i className="icon-2 font-extrabold"></i>
                     </a>
-                  </li>
+                  </li> */}
                   <li className="icon has-droupdown w-[62px] p-0">
                     <a href="#" className='flex justify-center items-center'><i className="icon-25"></i></a>
                     <ul className="submenu rounded-3xl py-7 px-6">
+                      <li>
+                        <div className="flex flex-col items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="48px" height="48px" viewBox="0 0 368.000000 368.000000" preserveAspectRatio="xMidYMid meet">
+                            <g transform="translate(0.000000,368.000000) scale(0.100000,-0.100000)" fill="#0d9488" stroke="none">
+                              <path d="M1694 3669 c-895 -65 -1619 -796 -1683 -1701 -72 -1009 691 -1886 1702 -1957 1007 -72 1885 692 1956 1701 46 645 -252 1265 -789 1640 -183 128 -456 243 -679 288 -87 17 -350 43 -386 38 -5 0 -60 -4 -121 -9z m324 -120 c577 -63 1084 -410 1346 -919 220 -429 255 -905 99 -1353 -31 -92 -113 -268 -151 -325 l-15 -23 -64 70 c-227 249 -574 453 -923 541 -279 70 -636 69 -923 -4 -360 -92 -711 -307 -951 -584 -45 -53 -40 -58 -126 110 -253 491 -253 1058 1 1558 321 632 1008 1006 1707 929z"></path>
+                              <path d="M1684 3121 c-295 -80 -489 -346 -471 -646 10 -154 62 -276 169 -391 77 -82 152 -131 258 -168 76 -27 98 -30 200 -30 102 0 124 3 200 30 106 37 181 86 258 168 70 75 112 145 144 241 32 98 33 269 1 370 -61 193 -221 355 -413 416 -95 31 -253 35 -346 10z"></path>
+                            </g>
+                          </svg>
+                        <div className="flex flex-col items-center gap-2 ml-0">
+                          <h4 className="font-semibold text-center">Fernando Avendaño</h4>
+                          <p className='text-sm'>Rango: <span className='font-[500]'>Doble Diamante</span></p>
+                          <p className='text-sm'>Puntos: <span className='font-[500]'>40 ptos.</span></p>
+                        </div>
+                      </div>
+                      </li>
+                      <div className="w-full border-b border-neutral-200 dark:border-neutral-700"></div>
                       <li>
                         <a href="/contact-us">
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
@@ -124,12 +140,12 @@ const Header = ({ header_style, no_top_bar, disable_full_width, disable_category
                     </ul>
                     {/* <AvatarDropdown /> */}
                   </li>
-                  <li className="icon">
+                  {/* <li className="icon">
                     <Link href="/wishlist" className='wishlist'>
                       <i className="icon-22 font-extrabold"></i>
                       <span className="count">{wishlists?.length}</span>
                     </Link>
-                  </li>
+                  </li> */}
                   <li className="icon cart-icon">
                     <Link href="/cart" className='cart-icon'>
                       <i className="icon-3 font-extrabold"></i>

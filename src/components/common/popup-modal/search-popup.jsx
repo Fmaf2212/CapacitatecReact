@@ -15,7 +15,7 @@ const SearchPopup = ({isSearchOpen,setIsSearchOpen}) => {
                 </div>
                 <div className="inner">
                     <form className="search-form" onSubmit={handleSubmit}>
-                        <input type="text" className="edublink-search-popup-field" placeholder="Search Here..." />
+                        <input type="text" className="edublink-search-popup-field" placeholder="Buscar aquí..." />
                         <button className="submit-button"><i className="icon-2"></i></button>
                     </form>
                 </div>
