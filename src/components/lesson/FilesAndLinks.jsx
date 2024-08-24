@@ -1,0 +1,24 @@
+import React from 'react'
+import styles from './syllabus.module.css';
+
+const FilesAndLinks = ({title, link, imagen}) => {
+    return (
+        <a href={link} className={styles['FilesAndLinks-item']} target="_blank">
+            <div className={styles['FilesAndLinks-item--link']}>
+                <figure className={styles['FilesAndLinks-item--favicon']}>
+                    {imagen}
+                </figure>
+                <div>
+                    <p>{title}</p>
+                    <p className={styles['FilesAndLinks-item--url']}>{link}</p>
+                </div>
+            </div>
+            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up-right-from-square" className={styles['svg-inline--fa'] + ' ' + styles['fa-arrow-up-right-from-square'] + ' ' + styles['FilesAndLinks-item--download']} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path fill="currentColor" d="M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z">
+                </path>
+            </svg>
+        </a>
+    )
+}
+
+export default FilesAndLinks

@@ -48,7 +48,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
     <div className={`edu-course course-style-1 ${classes ? classes : ''} hover-button-bg-white`}>
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data.productId}`}>
+          <Link href={`/course-details/${data.productId}`} width="270" height="200">
             <img src={`https://api.yosoymitosis.com/StaticFiles/ProductsImg/${data.imageName}`} alt="Course Meta" />
           </Link>
           <div className="time-top">

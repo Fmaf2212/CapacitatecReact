@@ -15,12 +15,12 @@ const BreadcrumbThree = ({ title, subtitle }) => {
                     <ul className="edu-breadcrumb">
                         <li className="breadcrumb-item">
                             <Link href="/">
-                            Home
+                            Inicio
                             </Link>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
-                        <li className="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li className="separator"><i className="icon-angle-right"></i></li>
+                        {/* <li className="breadcrumb-item"><a href="#">Pages</a></li> */}
+                        {/* <li className="separator"><i className="icon-angle-right"></i></li> */}
                         <li className="breadcrumb-item active" aria-current="page">{subtitle}</li>
                     </ul>
                 </div>

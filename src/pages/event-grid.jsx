@@ -5,7 +5,7 @@ import EventGridMain from '../components/event-grid';
 const EventGrid = () => {
     return (
         <Wrapper>
-            <SEO pageTitle={'Event Grid'} />
+            <SEO pageTitle={'Tienda'} />
             <EventGridMain />
         </Wrapper>
     )

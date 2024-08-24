@@ -46,7 +46,7 @@ const menu_data = [
         droupdown: true,
         submenus: [
             { title: 'Puntos', link: '#' },
-            { title: 'Tienda', link: '#' },
+            { title: 'Tienda', link: '/event-grid' },
             { title: 'Verificación de Certificado', link: '#' }
         ]
     },

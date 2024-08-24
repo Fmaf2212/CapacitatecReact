@@ -23,14 +23,14 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
     return (
         <div className="edu-sorting-area">
             <div className="sorting-left">
-                {
+                {/* {
                     items 
                     ? ( <h6 className="showing-text">Showing <span>{num}</span> of <span>{items.length}</span> courses</h6> )
                     : ( <h6 className="showing-text">Showing <span>{num}</span> courses</h6> )
-                }
+                } */}
             </div>
             <div className="sorting-right">
-                <div className="layout-switcher">
+                {/* <div className="layout-switcher">
                     <label>{course_list ? 'List' : 'Grid' }</label>
                     <ul className="switcher-btn">
                         <li>
@@ -44,13 +44,15 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
                             </Link>
                         </li>
                     </ul>
-                </div>
+                </div> */}
                 <div className="edu-sorting">
                     <div className="icon"><i className="icon-55"></i></div>
                     <select onChange={handleChange} className="edu-select">
-                        <option>Filters</option>
-                        <option>Low To High</option>
-                        <option>High To Low</option>
+                        <option>Filtros</option>
+                        <option>Ordenar de A - Z</option>
+                        <option>Ordenar de Z - A</option>
+                        <option>Precio más alto</option>
+                        <option>Precio más bajo</option>
                     </select>
                 </div>
             </div>

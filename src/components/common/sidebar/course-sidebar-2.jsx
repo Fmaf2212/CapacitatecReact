@@ -78,7 +78,7 @@ const CourseSidebarTwo = ({ course_items }) => {
         <div className="course-sidebar-2">
             <div className="edu-course-widget widget-category">
                 <div className="inner">
-                    <h5 className={`widget-title widget-toggle ${showCategory?'active':''}`} onClick={()=> setShowCategory(!showCategory)}>Categories</h5>
+                    <h5 className={`widget-title widget-toggle ${showCategory?'active':''}`} onClick={()=> setShowCategory(!showCategory)}>Categorías</h5>
 
                     <div className="content" style={{display:showCategory?'block':'none'}}>
                         {all_categories.map((c, i) => (
@@ -96,7 +96,7 @@ const CourseSidebarTwo = ({ course_items }) => {
 
             <div className="edu-course-widget widget-instructor">
                 <div className="inner">
-                    <h5 className={`widget-title widget-toggle ${showInstructor?'active':''}`}  onClick={()=> setShowInstructor(!showInstructor)}>Instructor</h5>
+                    <h5 className={`widget-title widget-toggle ${showInstructor?'active':''}`}  onClick={()=> setShowInstructor(!showInstructor)}>Docente</h5>
 
                     <div className="content" style={{display:showInstructor?'block':'none'}}>
                         {all_instructors.map((instructor, i) => (
@@ -112,7 +112,7 @@ const CourseSidebarTwo = ({ course_items }) => {
                 </div>
             </div>
 
-            <div className="edu-course-widget widget-level">
+            {/* <div className="edu-course-widget widget-level">
                 <div className="inner">
                     <h5 className={`widget-title widget-toggle ${showLevel?'active':''} `} onClick={()=> setShowLevel(!showLevel)}>Level</h5>
 
@@ -128,9 +128,9 @@ const CourseSidebarTwo = ({ course_items }) => {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="edu-course-widget widget-language">
+            {/* <div className="edu-course-widget widget-language">
                 <div className="inner">
                     <h5 className={`widget-title widget-toggle ${showLanguage?'active':''}`} onClick={()=> setShowLanguage(!showLanguage)}>Language</h5>
 
@@ -146,20 +146,20 @@ const CourseSidebarTwo = ({ course_items }) => {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="edu-course-widget">
+            {/*<div className="edu-course-widget">
                 <h5 className="widget-title">Price Filter</h5>
-                {/* <Slider
+                 <Slider
                     value={price}
                     min={minPrice}
                     max={maxPrice}
                     tooltip={false}
                     orientation="horizontal"
                     onChange={(val) => handlePriceChange(val)}
-                /> */}
+                />
                 <div className='filter-price'>Price: <span>${minPrice}</span> <span>-</span> <span>${price}</span></div>
-            </div>
+            </div>*/}
             
             <div className="edu-course-widget">
                 <h5 className="widget-title mb-4">Reset Filter</h5>
