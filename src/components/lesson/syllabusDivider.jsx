@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './syllabus.module.css';
 
-const SyllabusDivider = () => {
+const SyllabusDivider = ({seccion}) => {
   return (
     <div className={styles['Syllabus-divider']} data-testid="Syllabus-divider">
       <span className={styles["Syllabus-divider-icon"]}>
@@ -10,7 +10,7 @@ const SyllabusDivider = () => {
         </svg>
       </span>
       <div className={styles["Syllabus-divider-text"]} data-testid="Syllabus-divider-text">
-        <p>Introducción y requisitos</p>
+        <p>{seccion}</p>
       </div>
     </div>
   )

@@ -13,7 +13,7 @@ const Syllabus = () => {
   };
 
   return (
-    <div className={`${styles['Syllabus']} ${isOpen ? styles['Syllabus--open'] : styles['Syllabus--close']}`} style={{ maxHeight: "calc(-90px + 100vh)", top: "90px" }}>
+    <div className={`${styles['Syllabus']} ${isOpen ? styles['Syllabus--open'] : styles['Syllabus--close']}`} style={{ maxHeight: "calc(-53px + 100vh)" }}>
       <div className={styles['Syllabus-container']}>
         <div className={styles['Syllabus-header']}>
           <button onClick={toggleSyllabus} aria-label="Mostrar temario" className={styles['Syllabus-toggle']}>
@@ -34,9 +34,9 @@ const Syllabus = () => {
             <a href="/cursos/react/" className={styles["Syllabus-course-title"]}>Curso de React.js</a>
           </div>
         </div>
-        <SyllabusDivider />
+        <SyllabusDivider seccion={"Introducción y requisitos"} />
         <SyllabusClass numeroClase={"1"} clase={"¿Qué necesitas para aprender React.js?"} />
-        <SyllabusDivider />
+        <SyllabusDivider seccion={"Maquetación con React.js"} />
         <SyllabusClass numeroClase={"2"} clase={"¿Qué es un componente?"} />
         <SyllabusClass numeroClase={"3"} clase={"Componentes de TODO Machine"} />
       </div>

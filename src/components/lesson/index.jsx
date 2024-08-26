@@ -10,6 +10,8 @@ import Syllabus from './syllabus';
 
 const index = () => {
   const [minHeight, setMinHeight] = useState('auto');
+  const [tabs, setTabs] = useState([]);
+  const [isVisibleSyllabus, setIsVisibleSyllabus] = useState(true);
   const videoJsOptions = {
     controls: true,
     responsive: true,
@@ -32,16 +34,49 @@ const index = () => {
         setMinHeight('auto');
       }
     };
+    // const calculateWidth = () => {
+    //   const width = window.innerWidth;
 
-    // Calcular el minHeight al cargar la página
+    //   if (width >= 1441) {
+    //     const calculatedWidth = 533.812 + ((width - 1441) * 0.1); // Ajusta el incremento según sea necesario
+    //     setWidth(`${calculatedWidth}px`);
+    //   } else {
+    //     setWidth('auto');
+    //   }
+    // };
+
+    const updateTabs = () => {
+      const width = window.innerWidth;
+
+      if (width < 768) {
+        setTabs([
+          { label: 'Temario', isActive: false },
+          { label: 'Recursos', isActive: true },
+          { label: 'Aportes', isActive: false, count: 117 },
+          { label: 'Preguntas', isActive: false, count: 27 },
+        ]);
+        setIsVisibleSyllabus(false);
+      } else {
+        setTabs([
+          { label: 'Recursos', isActive: true },
+          { label: 'Transcripción', isActive: false },
+        ]);
+        setIsVisibleSyllabus(true);
+      }
+    };
+
     calculateMinHeight();
+    // calculateWidth();
+    updateTabs();
 
-    // Recalcular el minHeight cuando la ventana cambie de tamaño
     window.addEventListener('resize', calculateMinHeight);
+    // window.addEventListener('resize', calculateWidth);
+    window.addEventListener('resize', updateTabs);
 
-    // Limpieza para eliminar el event listener cuando el componente se desmonte
     return () => {
       window.removeEventListener('resize', calculateMinHeight);
+      // window.removeEventListener('resize', calculateWidth);
+      window.removeEventListener('resize', updateTabs);
     };
   }, []);
 
@@ -72,14 +107,20 @@ const index = () => {
       <div id="main-wrapper" className="main-wrapper bg-[#116d5e]" style={{minHeight: "calc(100vh - 90px)"}}>
         <Header no_top_bar={true} />
         {/* <BreadcrumbThree title="My Account" subtitle="Account" /> */}
-        <Syllabus />
+        {
+          !!isVisibleSyllabus
+          ?
+          <Syllabus />
+          :
+          ''
+        }
         <div className={styles['MaterialView'] + " " + styles['MaterialView-type--video']} style={{ maxHeight: "calc(100vh)" }}>
-          <div className={styles['MaterialView-video']} style={{ maxHeight: "calc(-90px + 100vh)" }}>
+          <div className={styles['MaterialView-video']}>
             <div className={styles['MaterialView-video-item']} data-testid='MaterialView-video-item' style={{ minHeight: minHeight }}>
               <div className={styles['MaterialVideo']}>
                 <div className={styles['VideoPlayer']} data-testid='VideoPlayer'>
                   <div className='flex justify-center items-center'>
-                    <VideoPlayer options={videoJsOptions} />
+                    {/* <VideoPlayer options={videoJsOptions} /> */}
                   </div>
                 </div>
               </div>
@@ -117,8 +158,15 @@ const index = () => {
                 <div className={styles['Tabs']}>
                   <div className={styles['u-wrapper']}>
                     <div className={styles['Tabs-tabs']}>
-                      <div className={styles['Tab'] + ' ' + styles['is-active']}>Recursos</div>
-                      <div className={styles['Tab']}>Transcripción</div>
+                      {tabs.map((tab, index) => (
+                        <div
+                          key={index}
+                          className={`${styles['Tab']} ${tab.isActive ? styles['is-active'] : ''}`}
+                        >
+                          {tab.label}
+                          {tab.count && <span>{tab.count}</span>}
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <div className={styles['Tabs-content']}>
