@@ -16,9 +16,12 @@ const index = () => {
     controls: true,
     responsive: true,
     fluid: true,
+    // techOrder: ["youtube"],
     sources: [{
-      src: 'https://path-to-your-video-file.mp4',
+      // src: 'https://path-to-your-video-file.mp4',
+      src: 'https://apitest.yosoymitosis.com/StaticFiles/video/Ciseco%20-%20Google%20Chrome%202024-04-10%2020-39-53.mp4',
       type: 'video/mp4'
+      //type: 'video/youtube',  // Cambia el tipo a 'video/youtube'
     }]
   };
 
@@ -120,7 +123,8 @@ const index = () => {
               <div className={styles['MaterialVideo']}>
                 <div className={styles['VideoPlayer']} data-testid='VideoPlayer'>
                   <div className='flex justify-center items-center'>
-                    {/* <VideoPlayer options={videoJsOptions} /> */}
+                    <VideoPlayer options={videoJsOptions} />
+                    <h1>TOÑO PUTITO ACA VA EL VIDEO</h1>
                   </div>
                 </div>
               </div>
