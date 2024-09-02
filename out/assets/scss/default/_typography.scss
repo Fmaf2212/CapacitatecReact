@@ -48,7 +48,7 @@ ul,
 table,
 hr {
     margin: 0;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 
 
@@ -200,14 +200,14 @@ h6,
 }
 
 p {
-    font-size: var(--font-size-b1);;
-    line-height: var(--line-height-b1);
-    font-weight: 400;
-    color: var(--color-body);
-    margin: 0 0 30px;
+    // font-size: var(--font-size-b1);;
+    // line-height: var(--line-height-b1);
+    // font-weight: 400;
+    // color: var(--color-body);
+    // margin: 0 0 30px;
 
     @media #{$sm-layout} {
-        margin: 0 0 20px;
+        margin: 0 0 2px;
     }
 
     &.b1 {

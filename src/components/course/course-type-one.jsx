@@ -35,12 +35,13 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
   // }
 
   // handle add to cart
-  const handleAddToCart = (course) => {
+  const handleAddToCart = (data) => {
+    console.log(data);
     dispatch(cart_course({
-      id: course.productId,
-      img: `https://api.yosoymitosis.com/StaticFiles/ProductsImg/${course.imageName}`,
-      price: course.price,
-      title: course.productName
+      id: data.courseId,
+      img: `https://apitest.yosoymitosis.com/StaticFiles/CourseImg/${data.image}`,
+      price: data.price,
+      title: data.name
     }))
   }
 
@@ -48,19 +49,21 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
     <div className={`edu-course course-style-1 ${classes ? classes : ''} hover-button-bg-white`}>
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data.productId}`} width="270" height="200">
-            <img src={`https://api.yosoymitosis.com/StaticFiles/ProductsImg/${data.imageName}`} alt="Course Meta" />
+          <Link href={`/course-details/${data.courseId}`} width="294.98" height="200" className='w-[294.98px]'>
+          {data.image && (
+            <img src={`https://apitest.yosoymitosis.com/StaticFiles/CourseImg/${data.image}`} alt="Course Meta" className='w-full' />
+          )}
           </Link>
           <div className="time-top">
-            {/* <span className="duration"><i className="icon-61"></i>{data.duration}</span> */}
+            <span className="duration"><i className="icon-61"></i>{data.duration}</span>
           </div>
         </div>
         <div className="content">
-          {/* <span className="course-level">{data.level}</span> */}
-          <h6 className="title">
-            <a href="#">{data.productName}</a>
+          <span className="course-level">{data.nivel}</span>
+          <h6 className="title text-lg font-[system-ui]">
+            <a href="#">{data.name}</a>
           </h6>
-          {/* <div className="course-rating">
+          <div className="course-rating">
             <div className="rating">
               <i className="icon-23"></i>
               <i className="icon-23"></i>
@@ -68,11 +71,15 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
               <i className="icon-23"></i>
               <i className="icon-23"></i>
             </div>
-            <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
-          </div> */}
-          <ul className="course-meta flex justify-between">
-            <li><div className="course-price">S/. {data.price}</div></li>
-            <li><div className="course-price">{data.networkPoints} Puntos</div></li>
+            <span className="rating-count">({data.rating} / 9 Rating)</span>
+          </div>
+          <div className='flex justify-between items-center w-full my-3'>
+            <div className="text-[--color-secondary] font-semibold">S/. {data.price}</div>
+            <div className="">{data.isCertified ? 'Certificado': 'Sin certificado'}</div>
+          </div>
+          <ul className="course-meta">
+              <li><i className="icon-24"></i>{data.countClasses} Clases</li>
+              <li><i className="icon-25"></i>{data.countStudents} Estudiantes</li>
           </ul>
         </div>
       </div>
@@ -86,13 +93,13 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
           {/* <button onClick={() => handleWishlist(data)} className={`wishlist-btn ${isWishlistSelected ? 'active' : ''}`}>
             <i className="icon-22"></i>
           </button> */}
-          {/* <span className="course-level">{data.level}</span> */}
-          <h6 className="title">
-            <Link href={`/course-details-2/${data.productId}`}>
-              {data.productName}
+          <span className="course-level">{data.nivel}</span>
+          <h6 className="title text-lg font-[system-ui]">
+            <Link href={`/course-details-2/${data.courseId}`}>
+              {data.name}
             </Link>
           </h6>
-          {/* <div className="course-rating">
+          <div className="course-rating">
             <div className="rating">
               <i className="icon-23"></i>
               <i className="icon-23"></i>
@@ -100,16 +107,19 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
               <i className="icon-23"></i>
               <i className="icon-23"></i>
             </div>
-            <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
-          </div> */}
-          {/* <div className="course-price">${data.course_price}</div> */}
-          {/* <p>{data.short_desc}</p> */}
-          <ul className="course-meta flex justify-between">
-            <li><div className="course-price">S/. {data.price}</div></li>
-            <li><div className="course-price">{data.networkPoints} Puntos</div></li>
+            <span className="rating-count">({data.rating} / 9 Rating)</span>
+          </div>
+          <p>{data.littleDescription}</p>
+          <div className='flex justify-between items-center w-full my-3'>
+            <div className="text-[#fff] font-semibold">S/. {data.price}</div>
+            <div className="text-[#fff]">{data.isCertified ? 'Certificado': 'Sin certificado'}</div>
+          </div>
+          <ul className="course-meta">
+              <li><i className="icon-24"></i>{data.countClasses} Clases</li>
+              <li><i className="icon-25"></i>{data.countStudents} Estudiantes</li>
           </ul>
           <a onClick={() => handleAddToCart(data)} className="edu-btn btn-secondary btn-small" style={{ cursor: 'pointer' }}>
-            {cartCourses.some(item => item.id === data.productId) ? 'Added to cart' : 'Add to cart'}
+            {cartCourses.some(item => item.id === data.courseId) ? 'Añadido' : 'Añadir'}
             <i className="icon-4"></i>
           </a>
         </div>

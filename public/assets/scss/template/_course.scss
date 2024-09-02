@@ -39,12 +39,14 @@
             display: block;
             overflow: hidden;
             border-radius: 5px 5px 0 0;
-            width: 270px;
+            width: 100%;
             height: 200px;
             img {
                 border-radius: 5px 5px 0 0;
                 transition: 0.4s;
                 width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
             &:after {
                 content: "";
@@ -83,7 +85,7 @@
         }
     }
     .content {
-        padding: 30px 20px 16px 30px;
+        padding: 22px 16px 16px;
         .course-level {
             font-size: 13px;
             font-weight: 500;
@@ -150,16 +152,16 @@
                 margin-right: 25px;
                 position: relative;
                 transition: var(--transition);
-                // &:after {
-                //     content: "";
-                //     height: 19px;
-                //     width: 1px;
-                //     background-color: #e5e5e5;
-                //     position: absolute;
-                //     top: 1px;
-                //     right: -15px;
-                //     transition: var(--transition);
-                // }
+                &:after {
+                    content: "";
+                    height: 19px;
+                    width: 1px;
+                    background-color: #e5e5e5;
+                    position: absolute;
+                    top: 1px;
+                    right: -15px;
+                    transition: var(--transition);
+                }
                 &:last-child {
                     margin-right: 0;
                     &:after {
@@ -209,7 +211,7 @@
         left: 0;
         right: 0;
         border-radius: 4px;
-        padding: 50px 20px 45px 30px;
+        padding: 22px 16px 16px;
         visibility: hidden;
         opacity: 0;
         transition: var(--transition);
@@ -373,7 +375,7 @@
             visibility: visible;
             opacity: 1;
             transform: translateY(-50%) translateX(0);
-        } 
+        }
     }
     &.course-style-2 {
         .course-hover-content {

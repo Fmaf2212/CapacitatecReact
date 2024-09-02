@@ -22,6 +22,7 @@
                 position: relative;
                 height: 90px;
                 line-height: 94px;
+                transition: 1s ease height;
                 .count {
                     position: absolute;
                     top: 24px;
@@ -43,16 +44,16 @@
                     color: var(--color-primary);
                 }
             }
-            button {
-                font-size: 22px;
-                color: var(--color-heading);
-                position: relative;
-                height: 90px;
-                line-height: 94px;
-                &:hover {
-                    color: var(--color-primary);
-                }
-            }
+            // button {
+            //     font-size: 22px;
+            //     color: var(--color-heading);
+            //     position: relative;
+            //     height: 90px;
+            //     line-height: 94px;
+            //     &:hover {
+            //         color: var(--color-primary);
+            //     }
+            // }
             &.cart-icon {
                 margin-right: 30px;
                 @media #{$large-mobile} {
@@ -118,3 +119,13 @@
         }
     }
 }
+@media screen and (max-width: 1200px) {
+    .header-action {
+      li.icon {
+        a {
+          height: 80px;
+          line-height: 84px;
+        }
+      }
+    }
+  }

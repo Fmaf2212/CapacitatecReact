@@ -124,7 +124,6 @@ const index = () => {
                 <div className={styles['VideoPlayer']} data-testid='VideoPlayer'>
                   <div className='flex justify-center items-center'>
                     <VideoPlayer options={videoJsOptions} />
-                    <h1>TOÑO PUTITO ACA VA EL VIDEO</h1>
                   </div>
                 </div>
               </div>

@@ -38,7 +38,7 @@ const CourseArea = () => {
   useEffect(() => {
     const fetchData = async () => {
       const pageNumber = 1;
-      const pageSize = 1000;
+      const pageSize = 10;
       try {
          //let userId = 0; Valor por defecto
 
@@ -49,22 +49,27 @@ const CourseArea = () => {
         //   userId = userData.userId;
         // }
         const response = await axios.post(
-          "https://api.yosoymitosis.com/v1/Product/GetProductsStore",
+          "https://apitest.yosoymitosis.com/v1/Course/GetCoursesByUser",
           {
             number: pageNumber,
-            size: pageSize
+            size: pageSize,
+            nivelId: 0,
+            isCertified: null,
+            lenguageId: 0,
+            categoryId: 0,
+            userId: 0
           },
           {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibWl0b3NpekFwaSIsInBhc3N3b3JkIjoiQG1pdG9zaXo5NiIsImF1ZCI6IkZyb250TWl0b3NpeiJ9.PjRxNwguwkC6I_Qtlo6XLy1686QFyU5L2QroleKQAX0'
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibWl0b3NpekFwaSIsInBhc3N3b3JkIjoiQG1pdG9zaXo5NiIsImF1ZCI6IkZyb250Q2FwYWNpdGF0ZWMifQ.bRpwHDRVjqSYrYnDwXY2iySlEZdjkA3kHGtx7MTm8Ro'
             },
           }
         );
         if (response.data.message === "Success") {
           // setDataProducts(response.data.data.productStore);
           // console.log(response.data.data.productStore)
-          setProducts(response.data.data.productStore);
+          setProducts(response.data.data.courseByUsers);
         } else {
           console.error("Error al consumir el servicio GetProductsStore");
         }
@@ -88,7 +93,7 @@ const CourseArea = () => {
             <div className="row g-5">
               {paginatedProducts?.map((item, index) => {
                 return (
-                  <div key={index} className="col-md-6 col-xl-3">
+                  <div key={index} className="col-md-6 col-xl-4">
                     <CourseTypeOne data={item} classes="course-box-shadow" />
                   </div>
                 )

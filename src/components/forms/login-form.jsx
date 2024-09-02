@@ -19,12 +19,12 @@ const LoginForm = () => {
     validationSchema: loginSchema,
     onSubmit: async (values, { resetForm }) => {
       const { email, password } = values;
-      let url = "https://api.yosoymitosis.com/v1/Access/ValidateLogin";
+      let url = "https://apitest.yosoymitosis.com/v1/Access/ValidateLogin";
       try {
         const respuesta = await axios.post(
           url,
           { userName: email, password: password },
-          { headers: { "Content-Type": "application/json", Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibWl0b3NpekFwaSIsInBhc3N3b3JkIjoiQG1pdG9zaXo5NiIsImF1ZCI6IkZyb250TWl0b3NpeiJ9.PjRxNwguwkC6I_Qtlo6XLy1686QFyU5L2QroleKQAX0` } }
+          { headers: { "Content-Type": "application/json", Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibWl0b3NpekFwaSIsInBhc3N3b3JkIjoiQG1pdG9zaXo5NiIsImF1ZCI6IkZyb250Q2FwYWNpdGF0ZWMifQ.bRpwHDRVjqSYrYnDwXY2iySlEZdjkA3kHGtx7MTm8Ro` } }
         );
 
         if (respuesta.data.message === "Success") {
@@ -35,6 +35,30 @@ const LoginForm = () => {
           } else {
             window.location.href = "https://www.google.com";
           }
+          // const getData = async () => {
+          //   let url = "https://api.yosoymitosis.com/v1/User/GetUserProfile";
+          //   try {
+          //     const response = await axios.post(
+          //       url,
+          //       {
+          //         userId: userId,
+          //       },
+          //       {
+          //         headers: {
+          //           "Content-Type": "application/json",
+          //           Authorization: `Bearer ${BEARER_TOKEN}`,
+          //         },
+          //       }
+          //     );
+          //     const userData = {
+          //       imageUrl: `https://api.yosoymitosis.com/StaticFiles/ProfileImg/${response.data.data.profilePicture}`,
+          //       names: response.data.data.names,
+          //       lastName: response.data.data.lastName,
+          //     };
+          //     setUserDataForAvatarDropdown(userData);
+          //   } catch (error) {}
+          // };
+          // getData();
         }
       } catch (error) {
         Swal.fire({
@@ -60,7 +84,7 @@ const LoginForm = () => {
           onBlur={handleBlur}
           type="text"
           name="email"
-          placeholder="Ingresar usuario o correo electrónico"
+          placeholder="Ingresar usuario"
         />
         {touched.email && <ErrorMsg error={errors.email} />}
       </div>

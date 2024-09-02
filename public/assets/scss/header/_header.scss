@@ -637,6 +637,12 @@
                 background: var(--color-darker);
               }
             }
+            button {
+              &:hover{
+                color: var(--color-primary) !important;
+                background: var(--color-darker);
+              }
+            }
           }
         }
 

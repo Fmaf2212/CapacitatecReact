@@ -8,76 +8,77 @@ button,
     -webkit-appearance: button;
 }
 
-input,
-select,
-textarea {
-    width: 100%;
-    transition: 0.3s;
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: none;
+}
+
+input:focus{
+    outline: none;
 }
 
 input {
     height: 60px;
 }
 
-select {
-    transition: 0.3s;
-    height: 50px;
-    padding: 10px 20px;
-    outline: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    border: 0 none;
-    border-radius: 3px;
-    color: var(--color-heading);
-    font-family: var(--font-secondary);
-    font-size: 15px;
-    font-weight: 600;
-    background: url(../../images/icons/arrow-icon.png) 88% center no-repeat transparent;
-    background-color: var(--color-lighten01);
-    min-width: 160px;
-    cursor: pointer;
-}
+// select {
+//     transition: 0.3s;
+//     height: 50px;
+//     padding: 10px 20px;
+//     outline: none;
+//     -moz-appearance: none;
+//     -webkit-appearance: none;
+//     appearance: none;
+//     border: 0 none;
+//     border-radius: 3px;
+//     color: var(--color-heading);
+//     font-family: var(--font-secondary);
+//     font-size: 15px;
+//     font-weight: 600;
+//     background: url(../../images/icons/arrow-icon.png) 88% center no-repeat transparent;
+//     background-color: var(--color-lighten01);
+//     min-width: 160px;
+//     cursor: pointer;
+// }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-input[type="tel"],
-textarea {
-    font-size: 15px;
-    background-color: var(--color-white);
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    padding: 0 25px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    color: var(--color-heading);
+// input[type="text"],
+// input[type="password"],
+// input[type="email"],
+// input[type="number"],
+// input[type="tel"],
+// textarea {
+//     font-size: 15px;
+//     background-color: var(--color-white);
+//     -webkit-box-shadow: none;
+//     box-shadow: none;
+//     padding: 0 25px;
+//     outline: none;
+//     border: none;
+//     border-radius: 5px;
+//     color: var(--color-heading);
 
-    /* -- Placeholder -- */
-    &::placeholder {
-        color: var(--color-placeholder);
-        /* Firefox */
-        opacity: 1;
-    }
+//     /* -- Placeholder -- */
+//     &::placeholder {
+//         color: var(--color-placeholder);
+//         /* Firefox */
+//         opacity: 1;
+//     }
 
-    &:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: var(--color-placeholder);
-        opacity: 1;
-    }
+//     &:-ms-input-placeholder {
+//         color: var(--color-placeholder);
+//         opacity: 1;
+//     }
 
-    &::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color: var(--color-placeholder);
-        opacity: 1;
-    }
+//     &::-ms-input-placeholder {
+//         color: var(--color-placeholder);
+//         opacity: 1;
+//     }
 
-    &:focus {
-        border-color: var(--color-primary);
-    }
-}
+//     &:focus {
+//         border-color: var(--color-primary);
+//     }
+// }
 
 
 textarea {

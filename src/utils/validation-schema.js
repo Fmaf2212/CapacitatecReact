@@ -10,7 +10,7 @@ export const registerSchema = Yup.object().shape({
 export const loginSchema = Yup.object().shape({
     // email: Yup.string().required('El correo electrónico es obligatorio.').email('El usuario o correo electrónico debe ser válido.').label( 'Email' ),
     // password: Yup.string().required('La contraseña es obligatoria.').min(6,'La contraseña debe tener al menos 6 carácteres.').label( 'Password' )
-    email: Yup.string().required('El correo electrónico es obligatorio.').label( 'Email' ),
+    email: Yup.string().required('El usuario es obligatorio.').label( 'Email' ),
     password: Yup.string().required('La contraseña es obligatoria.').label( 'Password' )
 });
 

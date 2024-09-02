@@ -9,19 +9,19 @@ const CourseBreadcrumb = ({ course, subtitle, codigo }) => {
     const { mouseDirection, mouseReverse } = useMouseMoveUI();
     const [detailCourse, setDetailCourse] = useState({});
 
-    useEffect(() => {
-        const fetchCourse = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3001/courses/${codigo}`);
-                console.log(response.data);
-                setDetailCourse(response.data);
-            } catch (error) {
-                console.error("Error fetching course data:", error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchCourse = async () => {
+    //         try {
+    //             const response = await axios.get(`http://localhost:3001/courses/${codigo}`);
+    //             console.log(response.data);
+    //             setDetailCourse(response.data);
+    //         } catch (error) {
+    //             console.error("Error fetching course data:", error);
+    //         }
+    //     };
 
-        fetchCourse();
-    }, [codigo]);
+    //     fetchCourse();
+    // }, [codigo]);
     
     return (
         <div className="edu-breadcrumb-area breadcrumb-style-3">
@@ -43,11 +43,14 @@ const CourseBreadcrumb = ({ course, subtitle, codigo }) => {
                         <li className="breadcrumb-item active" aria-current="page">{subtitle}</li>
                     </ul>
                     <div className="page-title">
-                        <h1 className="title">{detailCourse.title}</h1>
+                        {/* <h1 className="title">{detailCourse.title}</h1> */}
+                        <h1 className="title">Curso</h1>
                     </div>
                     <ul className="course-meta">
-                        <li><i className="icon-58"></i>by {detailCourse.instructor}</li>
-                        <li><i className="icon-59"></i>{detailCourse.language}</li>
+                        {/* <li><i className="icon-58"></i>by {detailCourse.instructor}</li> */}
+                        <li><i className="icon-58"></i>by instructor</li>
+                        {/* <li><i className="icon-59"></i>{detailCourse.language}</li> */}
+                        <li><i className="icon-59"></i>lenguaje</li>
                         <li className="course-rating">
                         <div className="rating">
                             <i className="icon-23"></i>
@@ -56,7 +59,7 @@ const CourseBreadcrumb = ({ course, subtitle, codigo }) => {
                             <i className="icon-23"></i>
                             <i className="icon-23"></i>
                         </div>
-                        <span className="rating-count">({detailCourse.ratingCount} Rating)</span>
+                        <span className="rating-count">(ratingCount Rating)</span>
                         </li>
                     </ul>
                 </div>

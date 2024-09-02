@@ -10,13 +10,13 @@
     position: relative;
 
     @media #{$smlg-device} {
-      padding-top: 10px;
-      padding-bottom: 10px;
+      // padding-top: 10px;
+      // padding-bottom: 10px;
     }
 
     @media #{$sm-layout} {
-      padding-top: 12px;
-      padding-bottom: 12px;
+      // padding-top: 12px;
+      // padding-bottom: 12px;
     }
 
     // z-index: 99; required, conflict issue with z-10 class 
@@ -599,7 +599,7 @@
 
       &.has-droupdown {
         .submenu {
-          min-width: 200px;
+          min-width: 280px;
           height: auto;
           position: absolute;
           top: 90%;
@@ -632,6 +632,12 @@
               font-family: var(--font-secondary);
               margin: 0;
 
+              &:hover{
+                color: var(--color-primary) !important;
+                background: var(--color-darker);
+              }
+            }
+            button {
               &:hover{
                 color: var(--color-primary) !important;
                 background: var(--color-darker);
