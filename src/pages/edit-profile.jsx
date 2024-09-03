@@ -5,6 +5,7 @@ import PageEditProfile from '../components/edit-profile';
 const EditProfile = () => {
     return (
         <Wrapper>
+            <Loader />
             <SEO pageTitle={'Editar perfil'} />
             <PageEditProfile />
         </Wrapper>

@@ -49,7 +49,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
     <div className={`edu-course course-style-1 ${classes ? classes : ''} hover-button-bg-white`}>
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data.courseId}`} width="294.98" height="200" className='w-[294.98px]'>
+          <Link href={`/detalleCurso/${data.courseId}`} width="294.98" height="200" className='w-[294.98px]'>
           {data.image && (
             <img src={`https://apitest.yosoymitosis.com/StaticFiles/CourseImg/${data.image}`} alt="Course Meta" className='w-full' />
           )}
@@ -95,7 +95,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = '01' }) => {
           </button> */}
           <span className="course-level">{data.nivel}</span>
           <h6 className="title text-lg font-[system-ui]">
-            <Link href={`/course-details-2/${data.courseId}`}>
+            <Link href={`/detalleCurso/${data.courseId}`}>
               {data.name}
             </Link>
           </h6>

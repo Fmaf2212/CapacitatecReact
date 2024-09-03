@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const category_contents = {
     title: 'Top Categories',
@@ -64,18 +66,49 @@ const category_contents = {
 const { title, text, category_items } = category_contents;
 
 const TopCategories = () => {
+    const controls = useAnimation();
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (ref.current) {
+                const { top } = ref.current.getBoundingClientRect();
+                if (top < window.innerHeight) {
+                    controls.start({ opacity: 1, y: 0 });
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check the scroll position initially
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [controls]);
     return (
         <div className="edu-categorie-area categorie-area-2 edu-section-gap">
             <div className="container">
-                <div className="section-title section-center" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                <motion.div
+                    ref={ref}
+                    className="section-title section-center"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={controls}
+                    transition={{ duration: 1, delay: 0 }}
+                >
                     <h2 className="title">{title}</h2>
                     <span className="shape-line"><i className="icon-19"></i></span>
                     <p>{text}</p>
-                </div>
+                </motion.div>
 
                 <div className="row g-5">
                     {category_items.map((item, i) => (
-                        <div key={i} className="col-lg-4 col-md-6" data-sal-delay={`${item.delay}`} data-sal="slide-up" data-sal-duration="800">
+                        <motion.div
+                            ref={ref}
+                            key={i}
+                            className="col-lg-4 col-md-6"
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={controls}
+                            transition={{ duration: 1, delay: item.delay/1000 }}
+                        >
                             <div className={`categorie-grid categorie-style-2 ${item.color}`}>
                                 <div className="icon">
                                     <i className={item.icon}></i>
@@ -86,7 +119,7 @@ const TopCategories = () => {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

@@ -12,9 +12,12 @@ import HeroArea from './hero-area';
 import TeamArea from './team-area';
 import TestimonialArea from './testimonial-area';
 import TopCategories from './top-categories';
+import Loader from '../../Loader';
 
 const index = () => {
     return (
+        <>
+        
         <div className='sticky-header'>
             <div id="main-wrapper" className="main-wrapper">
                 <Header/>
@@ -33,6 +36,7 @@ const index = () => {
                 <Footer/>
             </div>
         </div>
+        </>
     )
 }
 

@@ -5,6 +5,7 @@ import CartMain from '../components/cart';
 const Cart = () => {
     return (
         <Wrapper>
+            <Loader />
             <SEO pageTitle={'Cart'} />
             <CartMain />
         </Wrapper>

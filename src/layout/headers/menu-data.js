@@ -22,8 +22,8 @@ const menu_data = [
         mega_menu: false,
         droupdown: true,
         submenus: [
-            { title: 'Cursos', link: '/course-style-1'},
-            { title: 'Diplomados y Especializaciones', link: '#' },
+            { title: 'Cursos', link: '/cursos'},
+            { title: 'Diplomados y Especializaciones', link: '/' },
             { title: 'Paquetes', link: '#' },
             { title: 'Siminarios y talleres', link: '#' }
         ]

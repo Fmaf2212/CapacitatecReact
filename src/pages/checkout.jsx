@@ -5,6 +5,7 @@ import CheckoutMain from '../components/checkout';
 const Checkout = () => {
     return (
         <Wrapper>
+            <Loader />
             <SEO pageTitle={'Checkout'} />
             <CheckoutMain />
         </Wrapper>
