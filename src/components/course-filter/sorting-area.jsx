@@ -7,17 +7,34 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        if (e.target.value === 'Filters') {
-            setCourses(course_items);
-        } else if (e.target.value === 'Low To High') {
-            const lowToHigh = courses.slice().sort((a, b) => parseFloat(a.course_price) - parseFloat(b.course_price))
-            setCourses(lowToHigh);
-        } else if (e.target.value === 'High To Low') {
-            const highToHigh = courses.slice().sort((a, b) => parseFloat(b.course_price) - parseFloat(a.course_price))
-            setCourses(highToHigh);
+        const value = e.target.value;
+        let sortedCourses = [...courses];
+        if (value === 'Ordenar de A - Z') {
+            sortedCourses = sortedCourses.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (value === 'Ordenar de Z - A') {
+            sortedCourses = sortedCourses.sort((a, b) => b.name.localeCompare(a.name));
+        } else if (value === 'Precio más bajo') {
+            sortedCourses = sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        } else if (value === 'Precio más alto') {
+            sortedCourses = sortedCourses.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        } else {
+            sortedCourses = course_items; // Resetea a los datos originales si selecciona 'Filtros'
         }
+        console.log(sortedCourses);
+        setCourses(sortedCourses); // Actualiza los cursos con el nuevo filtro
         dispatch(add_item_offset(0));
         dispatch(add_force_page(0));
+        // if (e.target.value === 'Filters') {
+        //     setCourses(course_items);
+        // } else if (e.target.value === 'Low To High') {
+        //     const lowToHigh = courses.slice().sort((a, b) => parseFloat(a.course_price) - parseFloat(b.course_price))
+        //     setCourses(lowToHigh);
+        // } else if (e.target.value === 'High To Low') {
+        //     const highToHigh = courses.slice().sort((a, b) => parseFloat(b.course_price) - parseFloat(a.course_price))
+        //     setCourses(highToHigh);
+        // }
+        // dispatch(add_item_offset(0));
+        // dispatch(add_force_page(0));
     }
 
     return (

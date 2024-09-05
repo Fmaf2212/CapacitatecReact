@@ -17,6 +17,7 @@ const CourseArea = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [courses, setCourses] = useState(course_data);
   const { products, setProducts } = useProductStore();
+  const [productsOriginal, setProductsOriginal] = useState([]);
   const productsPerPage = 8;
   const totalProducts = products.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -56,8 +57,11 @@ const CourseArea = () => {
             nivelId: 0,
             isCertified: null,
             lenguageId: 0,
-            categoryId: 0,
-            userId: 0
+            categoryId: "",
+            userId: 0,
+            teacherId: "",
+            columnOrder: "",
+            orderDirection: ""
           },
           {
             headers: {
@@ -70,6 +74,7 @@ const CourseArea = () => {
           // setDataProducts(response.data.data.productStore);
           // console.log(response.data.data.productStore)
           setProducts(response.data.data.courseByUsers);
+          setProductsOriginal(response.data.data.courseByUsers);
         } else {
           console.error("Error al consumir el servicio GetProductsStore");
         }
@@ -88,7 +93,11 @@ const CourseArea = () => {
             <CourseSidebarTwo course_items={course_items} />
           </div>
           <div className="col-lg-9 col-pr--35 order-lg-1">
-            <SortingArea course_items={course_data} setCourses={setCourses} courses={totalProducts} />
+            <SortingArea
+              course_items={productsOriginal}
+              setCourses={setProducts}
+              courses={products}
+            />
 
             <div className="row g-5">
               {paginatedProducts?.map((item, index) => {
