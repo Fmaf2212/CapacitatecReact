@@ -1,70 +1,58 @@
-import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { add_force_page, add_item_offset } from '../../redux/features/filter-slice';
 
 const SortingArea = ({course_items, num, setCourses, courses,course_list, items }) => {
     const dispatch = useDispatch();
+    const [selectedOption, setSelectedOption] = useState('Filtros'); // Estado local para controlar la opción seleccionada
 
+    // Función para manejar el cambio de orden
     const handleChange = (e) => {
         const value = e.target.value;
+        localStorage.setItem('sortingOption', value); // Guardar la opción de ordenamiento en localStorage
+        sortCourses(value);
+    };
+
+    const sortCourses = (value) => {
+        console.log(value)
+        // const value = e.target.value;
         let sortedCourses = [...courses];
+
         if (value === 'Ordenar de A - Z') {
-            sortedCourses = sortedCourses.sort((a, b) => a.name.localeCompare(b.name));
+            sortedCourses.sort((a, b) => a.name.localeCompare(b.name));
         } else if (value === 'Ordenar de Z - A') {
-            sortedCourses = sortedCourses.sort((a, b) => b.name.localeCompare(a.name));
+            sortedCourses.sort((a, b) => b.name.localeCompare(a.name));
         } else if (value === 'Precio más bajo') {
-            sortedCourses = sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         } else if (value === 'Precio más alto') {
-            sortedCourses = sortedCourses.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            sortedCourses.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
         } else {
-            sortedCourses = course_items; // Resetea a los datos originales si selecciona 'Filtros'
+            sortedCourses = course_items;
         }
-        console.log(sortedCourses);
-        setCourses(sortedCourses); // Actualiza los cursos con el nuevo filtro
+        setCourses(sortedCourses);
         dispatch(add_item_offset(0));
         dispatch(add_force_page(0));
-        // if (e.target.value === 'Filters') {
-        //     setCourses(course_items);
-        // } else if (e.target.value === 'Low To High') {
-        //     const lowToHigh = courses.slice().sort((a, b) => parseFloat(a.course_price) - parseFloat(b.course_price))
-        //     setCourses(lowToHigh);
-        // } else if (e.target.value === 'High To Low') {
-        //     const highToHigh = courses.slice().sort((a, b) => parseFloat(b.course_price) - parseFloat(a.course_price))
-        //     setCourses(highToHigh);
-        // }
-        // dispatch(add_item_offset(0));
-        // dispatch(add_force_page(0));
     }
+
+    // Recuperar la opción de ordenamiento al montar el componente
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const savedOption = localStorage.getItem('sortingOption');
+            if (savedOption) {
+                setSelectedOption(savedOption); // Actualizar el estado con la opción guardada
+                sortCourses(savedOption);
+            }
+        }
+    }, []);
 
     return (
         <div className="edu-sorting-area">
             <div className="sorting-left">
-                {/* {
-                    items 
-                    ? ( <h6 className="showing-text">Showing <span>{num}</span> of <span>{items.length}</span> courses</h6> )
-                    : ( <h6 className="showing-text">Showing <span>{num}</span> courses</h6> )
-                } */}
             </div>
             <div className="sorting-right">
-                {/* <div className="layout-switcher">
-                    <label>{course_list ? 'List' : 'Grid' }</label>
-                    <ul className="switcher-btn">
-                        <li>
-                            <Link href="/course-style-1" className={!course_list?"active":''}>
-                                <i className="icon-53"></i>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/course-style-4" className={course_list?"active":''}>
-                                <i className="icon-54"></i>
-                            </Link>
-                        </li>
-                    </ul>
-                </div> */}
                 <div className="edu-sorting">
                     <div className="icon"><i className="icon-55"></i></div>
-                    <select onChange={handleChange} className="edu-select">
+                    <select onChange={handleChange} className="edu-select"  value={selectedOption}>
                         <option>Filtros</option>
                         <option>Ordenar de A - Z</option>
                         <option>Ordenar de Z - A</option>
