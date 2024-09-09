@@ -1,6 +1,7 @@
 import SEO from '../components/seo';
 import { Wrapper } from '../layout';
 import PageEditProfile from '../components/edit-profile';
+import Loader from '../components/Loader';
 
 const EditProfile = () => {
     return (

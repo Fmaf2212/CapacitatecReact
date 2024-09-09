@@ -10,14 +10,12 @@ import axios from 'axios';
 
 import ReactPaginate from "react-paginate";
 import CourseSidebarTwo from '../common/sidebar/course-sidebar-2';
+import { API_TOKEN } from '../../data/bearerToken';
 
 const CourseArea = () => {
-  // const coursePerView = 8;
-  // const [next, setNext] = useState(coursePerView);
+  const { products, setProducts, setSortingOption } = useProductStore();
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [courses, setCourses] = useState(course_data);
-  const { products, setProducts } = useProductStore();
-  const [productsOriginal, setProductsOriginal] = useState([]);
   const productsPerPage = 8;
   const totalProducts = products.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -26,77 +24,142 @@ const CourseArea = () => {
     currentPage * productsPerPage
   );
   const paginateNew = (data) => { setCurrentPage(data.selected + 1) }
+
   const showNextButton = currentPage !== totalPages;
   const showPrevButton = currentPage-1 !== 0;
 
-  const course_items = course_data.filter((arr, index, self) =>
-    index === self.findIndex((i) => (i.img === arr.img && i.State === arr.State)));
+  const [teacherIds, setTeacherIds] = useState([]);
+  const [categoryIds, setCategoryIds] = useState([]);
 
-  // handleLoadData
-  // const handleLoadData = () => {
-  //   setNext(value => value + 4)
-  // }
-  useEffect(() => {
-    const fetchData = async () => {
-      const pageNumber = 1;
-      const pageSize = 10;
-      try {
-         //let userId = 0; Valor por defecto
+  const [sortingIds, setSortingIds] = useState({valueSort: 'Filtros', columnOrder: '',
+    orderDirection: ''});
 
-        // Verificar si existe la clave USER_AUTH en localStorage
-        // const infoUserLogued = localStorage.getItem("USER_AUTH");
-        // if (infoUserLogued) {
-        //   const userData = JSON.parse(infoUserLogued);
-        //   userId = userData.userId;
-        // }
-        const response = await axios.post(
-          "https://apitest.yosoymitosis.com/v1/Course/GetCoursesByUser",
-          {
-            number: pageNumber,
-            size: pageSize,
-            nivelId: 0,
-            isCertified: null,
-            lenguageId: 0,
-            categoryId: "",
-            userId: 0,
-            teacherId: "",
-            columnOrder: "",
-            orderDirection: ""
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibWl0b3NpekFwaSIsInBhc3N3b3JkIjoiQG1pdG9zaXo5NiIsImF1ZCI6IkZyb250Q2FwYWNpdGF0ZWMifQ.bRpwHDRVjqSYrYnDwXY2iySlEZdjkA3kHGtx7MTm8Ro'
-            },
-          }
-        );
-        if (response.data.message === "Success") {
-          // setDataProducts(response.data.data.productStore);
-          // console.log(response.data.data.productStore)
-          setProducts(response.data.data.courseByUsers);
-          setProductsOriginal(response.data.data.courseByUsers);
-        } else {
-          console.error("Error al consumir el servicio GetProductsStore");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  // Función para actualizar los teacherIds seleccionados
+  const handleTeacherSelection = (selectedIds) => {
+    setTeacherIds(selectedIds); // Actualiza el estado local teacherIds con los profesores seleccionados
+    localStorage.setItem('selectedTeachers', JSON.stringify(selectedIds));
+  };
+
+  // Función para actualizar los categoryIds seleccionados
+  const handleCategorySelection = (selectedIds) => {
+    setCategoryIds(selectedIds); // Actualiza el estado local teacherIds con las categorías seleccionadas
+    localStorage.setItem('selectedCategories', JSON.stringify(selectedIds));
+  };
+
+  // Función para actualizar los Sorts seleccionados
+  const handleSortingSelection = ({ valueSort, columnOrder, orderDirection }) => {
+    const sortingData = {
+      valueSort: valueSort || '',  // Si valueSort es null, undefined o '', se usará '' como valor predeterminado.
+      columnOrder: columnOrder || '',
+      orderDirection: orderDirection || '',
     };
+    setSortingIds(sortingData);
+    localStorage.setItem('sortingOption', JSON.stringify(sortingData));
+  };
+
+  const fetchData = async () => {
+    const teacherIdString = teacherIds.join(','); // Convierte array a string separado por comas
+    const categoryIdString = categoryIds.join(',');
+
+    const pageNumber = 1;
+    const pageSize = 10;
+
+    try {
+      const response = await axios.post(
+        "https://apitest.yosoymitosis.com/v1/Course/GetCoursesByUser",
+        {
+          number: pageNumber,
+          size: pageSize,
+          nivelId: 0,
+          isCertified: null,
+          lenguageId: 0,
+          categoryId: categoryIdString,
+          userId: 0,
+          teacherId: teacherIdString,
+          columnOrder: sortingIds.columnOrder,
+          orderDirection: sortingIds.orderDirection
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_TOKEN}`
+          },
+        }
+      );
+      if (response.data.message === "Success") {
+        const savedOption = localStorage.getItem('sortingOption');
+        if (savedOption !== "Filtros") {
+          setSortingOption(savedOption);
+          sortCourses(savedOption, response.data.data.courseByUsers);
+        }else if(savedOption==="Filtros"){
+          setSortingOption(savedOption);
+          sortCourses(savedOption, response.data.data.courseByUsers);
+        }
+      } else {
+        console.error("Error al consumir el servicio GetProductsStore");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const savedSortingOption = localStorage.getItem('sortingOption');
+    if (savedSortingOption) {// cumple siempre y cuando savedSortingOption contenga valor y no sea null
+      setSortingIds(JSON.parse(savedSortingOption));//convierto savedSortingOption que es una cadena JSON a un objeto JS, y lo seteo a mi estado local sortingIds.
+    }
+
+    const savedCategories = localStorage.getItem('selectedCategories');
+    if (savedCategories) {
+      setCategoryIds(JSON.parse(savedCategories));
+    } else {
+      setCategoryIds([]);
+    }
+
+    const savedTeachers = localStorage.getItem('selectedTeachers');
+    if (savedTeachers) {
+      setTeacherIds(JSON.parse(savedTeachers));
+    } else {
+      setTeacherIds([]);
+    }
+  }, [])//si no hay nada dentro del array de dependencias, quiere decir que se ejecutará una sola vez post renderizado del componente.
+
+  useEffect(() => {
     fetchData();
-  }, [currentPage, productsPerPage, setProducts]);
+  }, [currentPage, productsPerPage, setProducts, teacherIds, categoryIds, sortingIds]);
+
+  const sortCourses = (value,arrayProducts) => {
+
+    if (value === 'Ordenar de A - Z') {
+      arrayProducts.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (value === 'Ordenar de Z - A') {
+      arrayProducts.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (value === 'Precio más bajo') {
+      arrayProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    } else if (value === 'Precio más alto') {
+      arrayProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    } else {
+      arrayProducts = arrayProducts;
+    }
+    setProducts(arrayProducts);
+  }
 
   return (
     <div className="edu-course-area course-area-1 gap-tb-text">
       <div className="container">
         <div className="row g-5">
           <div className="col-lg-3 order-lg-2">
-            <CourseSidebarTwo course_items={course_items} />
+            <CourseSidebarTwo
+              onTeacherSelect={handleTeacherSelection}
+              onCategorySelect={handleCategorySelection}
+            />
           </div>
           <div className="col-lg-9 col-pr--35 order-lg-1">
             <SortingArea
-              course_items={productsOriginal}
+              course_items={products}
               setCourses={setProducts}
               courses={products}
+              onSortingSelect={handleSortingSelection}
             />
 
             <div className="row g-5">
@@ -108,28 +171,18 @@ const CourseArea = () => {
                 )
               })}
             </div>
-            {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-8 gap-y-10 mt-8 lg:mt-10">
-              {paginatedProducts.map((item, index) => (
-                // <ProductCardService data={item} key={index} />
-                console.log(item, index)
-              ))}
-            </div> */}
             <div className="flex flex-row mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row justify-center sm:items-center">
               <ReactPaginate
-                // nextLabel={showNextButton ? (<span className="w-10 h-10 flex items-center justify-center transition-colors bg-[#a59dac] hover:bg-[#625c67] rounded-md text-white"><i className="las la-angle-right"></i></span>) : null}
                 nextLabel={showNextButton ? (<>
                   <i className="icon-east"></i>
                 </>) : null}
                 onPageChange={paginateNew}
-                pageRangeDisplayed={3} // Mostrará un total de 3 números de página a la vez
-                // marginPagesDisplayed={1}
+                pageRangeDisplayed={3}
                 marginPagesDisplayed={2}
                 pageCount={totalPages}
-                // previousLabel={showPrevButton ? (<span className="w-10 h-10 flex items-center justify-center transition-colors bg-[#a59dac] hover:bg-[#625c67] rounded-md text-white"><i className="las la-angle-left"></i></span>) : null}
                 previousLabel={showPrevButton ? (<>
                   <i className="icon-west"></i>
                 </>) : null}
-                // pageClassName={`custom-link block border border-none hover:bg-[#a764e0] hover:${styles.shadowInner} hover:text-white transition-colors w-10 h-10 flex items-center justify-center rounded-md`}
                 pageClassName="page-items"
                 pageLinkClassName="page-links"
                 previousClassName="page-items"
@@ -139,19 +192,11 @@ const CourseArea = () => {
                 breakLabel='...'
                 breakClassName="page-items"
                 breakLinkClassName="page-links"
-                // containerClassName="flex items-center justify-center mt-8 mb-4 gap-2"
                 containerClassName="edu-pagination"
-                // activeClassName={`bg-[#a764e0] text-white transition-colors transition duration-300 ${styles.shadowInner}`}></ReactPaginate>
                 activeClassName="active"
                 renderOnZeroPageCount={null}>
               </ReactPaginate>
             </div>
-
-            {/* {next < courses.length &&
-              <div onClick={handleLoadData} className="load-more-btn" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1200">
-                <a className="edu-btn" style={{ cursor: 'pointer' }}>Load More <i className="icon-56"></i></a>
-              </div>
-            } */}
           </div>
         </div>
       </div>

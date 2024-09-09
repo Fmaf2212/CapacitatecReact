@@ -7,7 +7,6 @@ import Loader from '../Loader';
 const index = () => {
     return (
         <>
-        
             <Loader />
             <div className='sticky-header'>
                 <div id="main-wrapper" className="main-wrapper">
