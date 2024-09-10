@@ -10,16 +10,17 @@ export const useProductStore = create((set) => ({
   }, // Opción de ordenamiento
   setProducts: (newProducts) => set({ products: newProducts }),
   setSearchTerm: (term) => set({ searchTerm: term }),
-  //setSortingOption: (option) => set({ sortingOption: option }), // Función para actualizar la opción de ordenamiento
   // Función para actualizar la opción de ordenamiento
-  setSortingOption: ({ valueSort, columnOrder, orderDirection }) =>
+  setSortingOption: (s = {}) => {
+    const { valueSort = 'Filtros', columnOrder = '', orderDirection = '' } = s; // Asignamos valores por defecto si no existen
     set((state) => ({
       sortingOption: {
         valueSort: valueSort || state.sortingOption.valueSort, // Mantén el valor anterior si es undefined
         columnOrder: columnOrder || state.sortingOption.columnOrder,
-        orderDirection: orderDirection || state.sortingOption.orderDirection
+        orderDirection: orderDirection || state.sortingOption.orderDirection,
       }
-    })),
+    }));
+  },
 
   getProductsAndSorting: () => ({
     products: state.products,

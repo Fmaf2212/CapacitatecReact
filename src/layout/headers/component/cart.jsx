@@ -32,9 +32,9 @@ const Cart = () => {
                                         </Link>
                                     </h5>
                                     <div className="price-and-quantity">
-                                        <span className="quantity">{item.quantity}</span>
+                                        <span className="quantity">{item.quantity} </span>
                                         <span className="quantity-symbol">×</span>
-                                        <span className="price">$ {item.price}</span>
+                                        <span className="price"> S/. {item.price}</span>
                                     </div>
                                 </div>
                                 <div className="cart-item-remove">
@@ -53,11 +53,11 @@ const Cart = () => {
 
                     <div className="cart-checkout-buttons">
                         <Link href="/cart" className="edu-btn btn-small cart-btn">
-                            View Cart
+                            Ir carrito
                         </Link>
 
                         <Link href="/checkout" className="edu-btn btn-small btn-secondary checkout-btn">
-                            Checkout
+                            Ir a pagar
                         </Link>
                     </div>
                 </div>

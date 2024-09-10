@@ -672,6 +672,8 @@
     }
     .form-group {
         margin-bottom: 25px;
+        display: flex;
+        flex-direction: column;
         label {
             font-size: 16px;
             margin-bottom: 5px;
@@ -695,7 +697,9 @@
             border: 1px solid var(--color-border);
             color: var(--color-body);
             font-weight: 400;
-            background: url(../../images/icons/arrow-icon.png) 92% center no-repeat transparent
+            background: url(../../images/icons/arrow-icon.png) 92% center no-repeat transparent;
+            appearance: none;
+            padding: 10px 20px;
         }
     }
 }

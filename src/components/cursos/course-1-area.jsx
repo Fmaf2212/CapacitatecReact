@@ -53,6 +53,7 @@ const CourseArea = () => {
       columnOrder: columnOrder || '',
       orderDirection: orderDirection || '',
     };
+    console.log(sortingData);
     setSortingIds(sortingData);
     localStorage.setItem('sortingOption', JSON.stringify(sortingData));
   };
@@ -88,12 +89,25 @@ const CourseArea = () => {
       );
       if (response.data.message === "Success") {
         const savedOption = localStorage.getItem('sortingOption');
-        if (savedOption !== "Filtros") {
-          setSortingOption(savedOption);
-          sortCourses(savedOption, response.data.data.courseByUsers);
-        }else if(savedOption==="Filtros"){
-          setSortingOption(savedOption);
-          sortCourses(savedOption, response.data.data.courseByUsers);
+        console.log(savedOption);
+        if (savedOption) {
+          if (savedOption.valueSort !== "Filtros") {
+            setSortingOption(savedOption);
+            setProducts(response.data.data.courseByUsers);
+            // sortCourses(savedOption, response.data.data.courseByUsers);
+          }else if(savedOption.valueSort==="Filtros"){
+            setSortingOption(savedOption);
+            setProducts(response.data.data.courseByUsers);
+            // sortCourses(savedOption, response.data.data.courseByUsers);
+          }
+        }else{
+          if (sortingIds.valueSort !== "Filtros") {
+            setProducts(response.data.data.courseByUsers);
+            // sortCourses(savedOption, response.data.data.courseByUsers);
+          }else if(sortingIds.valueSort==="Filtros"){
+            setProducts(response.data.data.courseByUsers);
+            // sortCourses(savedOption, response.data.data.courseByUsers);
+          }
         }
       } else {
         console.error("Error al consumir el servicio GetProductsStore");
@@ -126,23 +140,23 @@ const CourseArea = () => {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage, productsPerPage, setProducts, teacherIds, categoryIds, sortingIds]);
+  }, [teacherIds, categoryIds, sortingIds]);
 
-  const sortCourses = (value,arrayProducts) => {
+  // const sortCourses = (value,arrayProducts) => {
 
-    if (value === 'Ordenar de A - Z') {
-      arrayProducts.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (value === 'Ordenar de Z - A') {
-      arrayProducts.sort((a, b) => b.name.localeCompare(a.name));
-    } else if (value === 'Precio más bajo') {
-      arrayProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-    } else if (value === 'Precio más alto') {
-      arrayProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-    } else {
-      arrayProducts = arrayProducts;
-    }
-    setProducts(arrayProducts);
-  }
+  //   if (value === 'Ordenar de A - Z') {
+  //     arrayProducts.sort((a, b) => a.name.localeCompare(b.name));
+  //   } else if (value === 'Ordenar de Z - A') {
+  //     arrayProducts.sort((a, b) => b.name.localeCompare(a.name));
+  //   } else if (value === 'Precio más bajo') {
+  //     arrayProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+  //   } else if (value === 'Precio más alto') {
+  //     arrayProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+  //   } else {
+  //     arrayProducts = arrayProducts;
+  //   }
+  //   setProducts(arrayProducts);
+  // }
 
   return (
     <div className="edu-course-area course-area-1 gap-tb-text">

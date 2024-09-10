@@ -6,7 +6,7 @@ import File from './File';
 import Folder from './Folder';
 import FilesAndLinks from './FilesAndLinks';
 import VideoPlayer from './VideoPlayer';
-import Syllabus from './syllabus';
+import Syllabus from './Syllabus';
 
 const index = () => {
   const [minHeight, setMinHeight] = useState('auto');

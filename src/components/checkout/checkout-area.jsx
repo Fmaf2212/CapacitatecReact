@@ -17,7 +17,7 @@ const CheckoutArea = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <section className="checkout-page-area section-gap-equal">
-            <div className="container">
+            <div className="container containerDiv">
                 <form>
                     <div className="checkout-notice">
                         <div className="coupn-box">

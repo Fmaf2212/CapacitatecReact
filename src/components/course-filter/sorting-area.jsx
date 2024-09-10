@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useProductStore } from '../../store/products'; // Importar el store de Zustand
 
 const SortingArea = ({ onSortingSelect }) => {
   const { setSortingOption, sortingOption } = useProductStore();
 
+  const [valueSort, setValueSort] = useState('Filtros')
+
   const handleChange = (e) => {
     const value = e.target.value;
     sortCourses(value);
+    setValueSort(value);
   };
 
   const sortCourses = (value) => {
@@ -36,24 +39,29 @@ const SortingArea = ({ onSortingSelect }) => {
       orderDirection = '';
     }
     onSortingSelect({ valueSort, columnOrder, orderDirection });
+    // Actualización del estado en Zustand
     setSortingOption({
       valueSort: valueSort,
       columnOrder: columnOrder,
       orderDirection: orderDirection
-    }); // Para actualizar la opción seleccionada en Zustand
+    });
   }
 
   useEffect(() => {
+    console.log(sortingOption);
     const savedsortingOption = localStorage.getItem('sortingOption');
+    console.log(savedsortingOption);
     if (savedsortingOption) {
+      // Parsear el JSON almacenado
+      const parsedOption = JSON.parse(savedsortingOption);
       setSortingOption({
-        valueSort: savedsortingOption.valueSort,
-        columnOrder: savedsortingOption.columnOrder,
-        orderDirection: savedsortingOption.orderDirection
+        valueSort: parsedOption.valueSort,
+        columnOrder: parsedOption.columnOrder,
+        orderDirection: parsedOption.orderDirection
       });
+      setValueSort(parsedOption.valueSort);
     }
-  }, []);
-
+  }, [setSortingOption, valueSort]);
   return (
     <div className="edu-sorting-area">
       <div className="sorting-left">
@@ -63,12 +71,12 @@ const SortingArea = ({ onSortingSelect }) => {
           <div className="icon">
             <i className="icon-55"></i>
           </div>
-          <select onChange={handleChange} className="edu-select" value={sortingOption.valueSort}>
-            <option>Filtros</option>
-            <option>Ordenar de A - Z</option>
-            <option>Ordenar de Z - A</option>
-            <option>Precio más alto</option>
-            <option>Precio más bajo</option>
+          <select onChange={handleChange} className="edu-select" value={valueSort}>
+            <option value="Filtros">Filtros</option>
+            <option value="Ordenar de A - Z">Ordenar de A - Z</option>
+            <option value="Ordenar de Z - A">Ordenar de Z - A</option>
+            <option value="Precio más alto">Precio más alto</option>
+            <option value="Precio más bajo">Precio más bajo</option>
           </select>
         </div>
       </div>
